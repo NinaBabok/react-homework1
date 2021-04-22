@@ -1,10 +1,11 @@
 import React from 'react';
 import './Section.scss';
 
-const Section = ({title, children, className=""}) => {
+const Section = ({title, children, event, className=""}) => {
+    className += event ?  "Section-Event" : "Section-Events";
     return (
-      <section className="section">
-        <h1 className="section__title">{title}</h1>
+      <section className="Section">
+        <h1 className="Section-Title">{title}</h1>
         <div className={className}>{children}</div>
       </section>
     );

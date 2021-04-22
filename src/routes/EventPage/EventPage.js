@@ -24,33 +24,33 @@ const Event = () => {
   const freeSeats = "Hodnik FOI-ja";
 
   return (
-    <Section title={title} className="section-event">
-      <div className="event-info ">
-        <figure className="event-info__figure">
-          <img src={image} alt="UX/UI workshop" className="event-info__image" />
+    <Section title={title} event>
+      <div className="EventInfo ">
+        <figure className="EventInfo-Figure">
+          <img src={image} alt="UX/UI workshop" className="EventInfo-Image" />
         </figure>
-        <div className="event-info__content">
-          <div className="event-info__content-row">
+        <div className="EventInfo-Content">
+          <div className="EventInfo-ContentRow">
             <EventInfoItem title="Lokacija" value={location} />
             <EventInfoItem title="Datum i vrijeme" value={date} />
           </div>
-          <div className="event-info__content-row">
+          <div className="EventInfo-ContentRow">
             <EventInfoItem title="Slobodna mjesta" value={freeSeats} />
             <EventInfoItem title="Firma" value={company} />
           </div>
           <Button>Prijavi se</Button>
         </div>
       </div>
-      <p className="event-info__description">{description}</p>
+      <p className="EventInfo-Description">{description}</p>
     </Section>
   );
 };
 
 const EventInfoItem = ({ title, value }) => {
   return (
-    <div className="event-info__item">
-      <h3 className="event-info__item-title">{title}</h3>
-      <p className="event-info__item-value">{value}</p>
+    <div className="EventInfoItem">
+      <h3 className="EventInfoItem-Title">{title}</h3>
+      <p className="EventInfoItem-Value">{value}</p>
     </div>
   );
 };

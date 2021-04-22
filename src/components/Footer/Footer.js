@@ -3,7 +3,7 @@ import './Footer.scss';
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className="Footer">
       <p>Copyright &copy; 2021 Speck Academy</p>
     </footer>
   );

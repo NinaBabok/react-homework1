@@ -4,13 +4,13 @@ import "./Button.scss";
 
 const Button = ({value, children, to}) => {
     return to ? (
-      <Link to={to} className="button">
+      <Link to={to} className="Button">
         {children || value}
       </Link>
     ) : (
-      <button className="button" value={value}>
+      <Button className="Button" value={value}>
         {children}
-      </button>
+      </Button>
     );
 }
 

@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <Section title="Featured events" className="section__events">
+      <Section title="Featured events">
         <Event
           image={design}
           title="UX/UI design workshop"

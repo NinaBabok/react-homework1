@@ -1,4 +1,4 @@
-.event-card {
+.EventCard {
     border: 1px solid #d0d0d0;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
@@ -10,7 +10,7 @@
 
     }
 
-    &__title {
+    &-Title {
         font-size: 18px;
         padding: 10px 0 20px;
         border-bottom: 1px solid #d0d0d0;
@@ -18,30 +18,32 @@
         margin-bottom: 15px;
     }
 
-    &__content {
+    &-Content {
         margin-bottom: 15px;
     }
 
-    &__content-row {
+    &-ContentRow {
         display: flex;
         justify-content: space-between;
         margin-bottom: 16px;
     }
 
-    &__content-row:last-child {
+    &-ContentRow:last-child {
         margin-bottom: 0;
     }
+}
 
-    &__item:last-child {
+.EventCardItem {
+    &:last-child {
         text-align: right;
     }
 
-    &__item-title {
+    &-Title {
         font-size: 12px;
         margin-bottom: 4px;
     }
 
-    &__item-value {
+    &-Value {
         font-size: 12px;
     }
 }
