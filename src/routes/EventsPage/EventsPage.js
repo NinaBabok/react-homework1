@@ -1,7 +1,7 @@
 import React from "react";
 import EventCard from "../../components/EventCard/EventCard";
 import Section from "../../components/Section/Section";
-import "./Events.scss";
+import "./EventsPage.scss";
 
 const Events = () => {
   return (

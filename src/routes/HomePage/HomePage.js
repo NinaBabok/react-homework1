@@ -1,5 +1,5 @@
 import React from "react";
-import "./Home.scss";
+import "./HomePage.scss";
 
 // images
 import marketing from "../../assets/marketing.jpg";

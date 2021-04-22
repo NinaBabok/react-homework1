@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router";
 import Button from "../../components/Button/Button";
 import Section from "../../components/Section/Section";
-import "./Event.scss";
+import "./EventPage.scss";
 
 import image from "../../assets/design.jpg";
 

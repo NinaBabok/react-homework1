@@ -8,9 +8,9 @@ const Button = ({value, children, to}) => {
         {children || value}
       </Link>
     ) : (
-      <Button className="Button" value={value}>
+      <button className="Button" value={value}>
         {children}
-      </Button>
+      </button>
     );
 }
 
