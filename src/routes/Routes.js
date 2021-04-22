@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Home from "./pages/HomePage/HomePage";
-import Events from "./pages/EventsPage/EventsPage";
-import Event from "./pages/EventPage/EventPage";
+import Home from "./HomePage/HomePage";
+import Events from "./EventsPage/EventsPage";
+import Event from "./EventPage/EventPage";
 import { Route, Switch } from "react-router-dom";
 
 const Routes = () => {
