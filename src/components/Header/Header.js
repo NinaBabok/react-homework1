@@ -1,9 +1,12 @@
 import React from "react";
 import "./Header.scss";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
+
+  let active = useLocation().pathname;
+
   return (
     <header className="Header">
       <div className="Header-Inner">
@@ -15,11 +18,16 @@ const Header = () => {
           <div className="Header-NavHamburgerLine"></div>
           <div className="Header-NavHamburgerLine"></div>
         </div>
-        <nav className="Header-Nav">
-          <Link to="/" className="Header-NavItem">
+        <nav
+          className="Header-Nav"
+        >
+          <Link to="/" className={active === "/" ? "Header-NavItem Header-NavItem_active" : "Header-NavItem"}>
             Home
           </Link>
-          <Link to="/events" className="Header-NavItem">
+          <Link
+            to="/events"
+            className={active === "/events" ? "Header-NavItem Header-NavItem_active" : "Header-NavItem"}
+          >
             Events
           </Link>
         </nav>

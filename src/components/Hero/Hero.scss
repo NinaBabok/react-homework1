@@ -1,5 +1,5 @@
+@import '../../theme';
 
-/* Section */
 .Hero {
   background-image: url(../../assets/hero.jpeg);
   height: 400px;
@@ -10,14 +10,14 @@
   position: relative;
 
   &-Heading {
-    color: #e4b43c;
+    color: $yellow;
     margin-bottom: 30px;
     line-height: 140%;
     font-size: 20px;
   }
 
   &-Overlay {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: $blackOverlay;
     width: 100%;
     height: 100%;
   }
@@ -33,13 +33,13 @@
   }
 
   &-Subheading {
-    color: #ffffff;
+    color: $white;
     line-height: 160%;
     font-weight: 400;
     font-size: 14px;
   }
 
-  @media screen and (min-width: 576px) {
+  @media screen and ($mobileLarge) {
     height: 500px;
     &-Heading {
       width: 500px;
@@ -47,7 +47,7 @@
     }
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and ($desktop) {
     &-Heading {
       font-size: 28px;
     }
@@ -59,7 +59,7 @@
       max-width: 1280px;
     }
   }
-  @media screen and (min-width: 1300px) {
+  @media screen and ($desktopLarge) {
     &-Heading {
       font-size: 32px;
     }

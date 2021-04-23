@@ -8,15 +8,9 @@ import { Route, Switch } from "react-router-dom";
 const Routes = () => {
     return (
       <Switch>
-        <Route path="/events">
-          <Events />
-        </Route>
-        <Route path="/event/:titleEvent">
-          <Event />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
+        <Route path="/" exact component={Home} />
+        <Route path="/events" component={Events} />
+        <Route path="/event/:titleEvent" component={Event} />
       </Switch>
     );
 }

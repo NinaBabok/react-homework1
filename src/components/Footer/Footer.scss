@@ -1,7 +1,9 @@
+@import '../../theme';
+
 .Footer {
     width: 100%;
-    background-color: #333333;
-    color: #d0d0d0;
+    background-color: $darkGrey;
+    color: $lightGrey;
     text-align: center;
     font-size: 14px;
     padding: 40px 0;

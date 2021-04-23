@@ -1,18 +1,20 @@
+@import '../../theme';
+
 .Button {
     display: block;
     text-decoration: none;
     width: 100%;
     line-height: 40px;
     text-align: center;
-    border: 1px solid #d33e3e;
+    border: 1px solid $red;
     border-radius: 6px;
-    background: #d33e3e;
-    color: #ffffff;
-    transition: all 0.3s ease-out;
+    background: $red;
+    color: $white;
+    transition: $transitionEase;
 
     &:hover {
         cursor: pointer;
-        border-color: #e4b43c;
-        background: #e4b43c;
+        border-color: $yellow;
+        background: $yellow;
     }
 }

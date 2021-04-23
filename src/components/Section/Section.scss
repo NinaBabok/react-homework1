@@ -1,3 +1,5 @@
+@import '../../theme';
+
 .Section {
     padding: 80px 15px;
     max-width: 1280px;
@@ -15,17 +17,13 @@
         row-gap: 48px;
     }
 
-    @media screen and (min-width: 576px) {
+    @media screen and ($mobileLarge) {
         &-Title {
             font-size: 24px;
-        }
-        // &-Events {
-        //     grid-template-columns: repeat(2, 1fr);
-        //     gap: 32px;
-        // }    
+        } 
     }
     
-    @media screen and (min-width: 768px) {
+    @media screen and ($tablet) {
         &-Event {
             padding: 80px 25px 65px;
         }
@@ -35,7 +33,7 @@
         }   
     }
 
-    @media screen and (min-width: 1024px) {
+    @media screen and ($desktop) {
         &-Title {
             font-size: 28px;
         }
@@ -51,7 +49,7 @@
         }
     }
 
-    @media screen and (min-width: 1300px) {
+    @media screen and ($desktopLarge) {
         &-Title {
             font-size: 32px;
         }
