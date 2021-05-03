@@ -1,14 +1,14 @@
-import React from 'react';
-import './Section.scss';
+import React from "react";
+import { SectionWrapper, SectionTitle } from './SectionStyle';
 
-const Section = ({title, children, event, className=""}) => {
-    className += event ?  "Section-Event" : "Section-Events";
-    return (
-      <section className="Section">
-        <h1 className="Section-Title">{title}</h1>
-        <div className={className}>{children}</div>
-      </section>
-    );
-}
+const Section = ({ children, title, withoutTopPadding }) => {
+
+  return (
+    <SectionWrapper withoutTopPadding={withoutTopPadding}>
+      {title && <SectionTitle>{title}</SectionTitle>}
+      {children}
+    </SectionWrapper>
+  );
+};
 
 export default Section;

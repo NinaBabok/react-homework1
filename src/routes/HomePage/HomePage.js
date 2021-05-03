@@ -1,41 +1,45 @@
-import React from "react";
-import "./HomePage.scss";
-
-// images
-import marketing from "../../assets/marketing.jpg";
-import development from "../../assets/development.jpg";
-import design from "../../assets/design.jpg";
+import React, { useEffect, useState } from "react";
 
 // components
 import Event from "../../components/Event/Event";
-import Section from "../../components/Section/Section";
 import Hero from "../../components/Hero/Hero";
-
+import { Grid } from "../../lib/style/generalStyles";
+import Section from "../../components/Section/Section";
+import eventsMock from "../../lib/mock/events";
+import { Spinner } from "../../components/Spinner/Spinner";
 
 const Home = () => {
+  const [events, setEvents] = useState(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setEvents(eventsMock);
+    }, 1000);
+  }, []);
 
   return (
     <>
       <Hero />
       <Section title="Featured events">
-        <Event
-          image={design}
-          title="UX/UI design workshop"
-          description="Learn how to solve big problems and test new ideas based on Google
-        Sprint methodology..."
-        />
-        <Event
-          image={development}
-          title="Frontend best practices"
-          description="Best frontend practices for developers. Learn advanced CSS
-            techniques and much more..."
-        />
-        <Event
-          image={marketing}
-          title="Digital marketing workshop"
-          description="Learn how to use Google Ads and social networks to gain customers
-            for your digital product..."
-        />
+        {events && (
+          <Grid columns={3}>
+            {events.map(
+              (event) =>
+                event.isFeatured && (
+                  <Event
+                    key={event.id}
+                    route={`/event/${event.id}`}
+                    image={event.imageUrl}
+                    imageAlt={event.imageAlt}
+                    title={event.title}
+                    description={event.shortDescription}
+                    buttonText="Find out more"
+                  />
+                )
+            )}
+          </Grid>
+        )}
+        {!events && <Spinner />}
       </Section>
     </>
   );

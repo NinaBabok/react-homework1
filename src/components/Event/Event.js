@@ -1,17 +1,19 @@
 import React from "react";
 import Button from "../Button/Button";
-import "./Event.scss";
+// import { Button } from "../../lib/style/generalStyles";
+import { Description, EventWrapper, Figure, Image, Title } from "./EventStyle";
 
-const Event = ({ image, title, description }) => {
+const Event = (props) => {
+
   return (
-    <div className="Event">
-      <figure className="Event-Figure">
-        <img className="Event-Image" src={image} alt="Design" />
-      </figure>
-      <h3 className="Event-Title">{title}</h3>
-      <p className="Event-Description">{description}</p>
-      <Button to={"/event/" + encodeURIComponent(title)}>Find out more</Button>
-    </div>
+    <EventWrapper>
+      <Figure>
+        <Image src={props.image} alt={props.imageAlt} />
+      </Figure>
+      <Title>{props.title}</Title>
+      <Description>{props.description}</Description>
+      <Button to={props.route}>{props.buttonText}</Button>
+    </EventWrapper>
   );
 };
 

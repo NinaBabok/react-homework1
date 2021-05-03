@@ -1,57 +1,90 @@
-import React from "react";
-import { useParams } from "react-router";
-import Button from "../../components/Button/Button";
+import React, { useEffect, useState } from "react";
+import { Title } from "../../lib/style/generalStyles";
+import {
+  Content,
+  ContentRow,
+  Description,
+  EventInfoItemWrapper,
+  Figure,
+  Image,
+  EventInfoItemValue,
+  EventInfoItemTitle,
+  Top,
+  SectionEvent,
+} from "./EventPageStyle";
 import Section from "../../components/Section/Section";
-import "./EventPage.scss";
+import eventsMock from "../../lib/mock/events";
+import Button from "../../components/Button/Button";
 
-import image from "../../assets/design.jpg";
+const Event = (props) => {
+  const routerEventId = parseInt(props.match.params.id);
+  const [events, setEvents] = useState(null);
+  const [event, setEvent] = useState(null);
 
-const Event = () => {
-  let { titleEvent } = useParams();
+  useEffect(() => {
+    setEvents(eventsMock);
+  }, []);
 
-  const title = decodeURIComponent(titleEvent);
-
-  const description = `
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis,
-    praesentium fugit? Doloremque id culpa est ipsum. Explicabo eveniet ducimus temporibus quas 
-    expedita, tenetur reiciendis nam laborum animi eum! Rem, accusamus. Lorem, ipsum dolor sit amet 
-    consectetur adipisicing elit. Totam sapiente voluptatibus impedit consequuntur cum ex sequi odio
-    numquam sit soluta, harum natus magni cupiditate quidem similique expedita doloremque eum
-    voluptatem!`;
-  const location = "Hodnik FOI-ja";
-  const date = "Hodnik FOI-ja";
-  const company = "Hodnik FOI-ja";
-  const freeSeats = "Hodnik FOI-ja";
+  useEffect(() => {
+    events && setEvent(...events.filter((event) => event.id === routerEventId));
+  }, [events, routerEventId]);
 
   return (
-    <Section title={title} event>
-      <div className="EventInfo ">
-        <figure className="EventInfo-Figure">
-          <img src={image} alt="UX/UI workshop" className="EventInfo-Image" />
-        </figure>
-        <div className="EventInfo-Content">
-          <div className="EventInfo-ContentRow">
-            <EventInfoItem title="Lokacija" value={location} />
-            <EventInfoItem title="Datum i vrijeme" value={date} />
-          </div>
-          <div className="EventInfo-ContentRow">
-            <EventInfoItem title="Slobodna mjesta" value={freeSeats} />
-            <EventInfoItem title="Firma" value={company} />
-          </div>
-          <Button>Prijavi se</Button>
-        </div>
-      </div>
-      <p className="EventInfo-Description">{description}</p>
-    </Section>
+    <>
+      {event && (
+        <>
+          <Title>{event && event.title}</Title>
+          <Section withoutTopPadding={true}>
+            <SectionEvent>
+              <Top>
+                <Figure>
+                  <Image src={event.imageUrl} alt={event.imageAlt} />
+                </Figure>
+                <Content>
+                  <EventInfo
+                    location={event.location}
+                    dateTime={event.dateTime}
+                    availability={event.availability}
+                    company={event.company}
+                    hasButton={true}
+                    route="/event"
+                    buttonText="Prijavi se"
+                  />
+                </Content>
+              </Top>
+              <Description>{event.description}</Description>
+            </SectionEvent>
+          </Section>
+        </>
+      )}
+    </>
+  );
+};
+
+const EventInfo = (props) => {
+  return (
+    <>
+      <ContentRow>
+        <EventInfoItem title="Lokacija" value={props.location} />
+        <EventInfoItem title="Datum i vrijeme" value={props.dateTime} />
+      </ContentRow>
+      <ContentRow>
+        <EventInfoItem title="Slobodna mjesta" value={props.availability} />
+        <EventInfoItem title="Firma" value={props.company} />
+      </ContentRow>
+      {props.hasButton && <Button to="">{props.buttonText}e</Button>}
+    </>
   );
 };
 
 const EventInfoItem = ({ title, value }) => {
   return (
-    <div className="EventInfoItem">
-      <h3 className="EventInfoItem-Title">{title}</h3>
-      <p className="EventInfoItem-Value">{value}</p>
-    </div>
+    <EventInfoItemWrapper className="EventInfoItem">
+      <EventInfoItemTitle>{title}</EventInfoItemTitle>
+      <EventInfoItemValue className="EventInfoItem-Value">
+        {value}
+      </EventInfoItemValue>
+    </EventInfoItemWrapper>
   );
 };
 

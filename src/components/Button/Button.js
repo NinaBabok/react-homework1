@@ -1,17 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import "./Button.scss";
+import React from "react";
+import { useHistory } from "react-router-dom";
+import { ButtonWrapper } from "./ButtonStyle";
 
-const Button = ({value, children, to}) => {
-    return to ? (
-      <Link to={to} className="Button">
-        {children || value}
-      </Link>
-    ) : (
-      <button className="Button" value={value}>
-        {children}
-      </button>
-    );
+export default function Button({to, children}) {
+
+  const history = useHistory();
+
+  function handleClick() {
+    to && history.push(to);
+  }
+
+  return <ButtonWrapper type="button" onClick={handleClick}>{children}</ButtonWrapper>;
 }
-
-export default Button;

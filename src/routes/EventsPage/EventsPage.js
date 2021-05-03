@@ -1,47 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import EventCard from "../../components/EventCard/EventCard";
 import Section from "../../components/Section/Section";
-import "./EventsPage.scss";
+import { Grid, Title } from "../../lib/style/generalStyles";
+
+import eventsMock from "../../lib/mock/events";
+import { Spinner } from "../../components/Spinner/Spinner";
+import { SearchBar } from "../../components/SearchBar/SearchBar";
 
 const Events = () => {
+  const [events, setEvents] = useState(null);
+  const [filteredEvents, setFilteredEvents] = useState(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setEvents(eventsMock);
+    }, 1000);
+  }, []);
+
+  useEffect(() => {
+    setFilteredEvents(events);
+  }, [events])
+
+  const handleSearch = (e) => {
+    const input = e.target.value;
+    setFilteredEvents(events.filter(e => e.title.toLowerCase().includes(input.toLowerCase())))
+  };
+
   return (
-    <Section title="Events">
-      <EventCard
-        title="UX/UI workshop"
-        location="Hodnik FOI-ja"
-        date="05.10.2021."
-        freeSeats="25"
-        company="Five"
-      />
-      <EventCard
-        title="Frontend best practices"
-        location="Hodnik FOI-ja"
-        date="06.10.2021."
-        freeSeats="25"
-        company="Speck"
-      />
-      <EventCard
-        title="Digital marketing workshop"
-        location="Dvorana D1"
-        date="6.10.2021."
-        freeSeats="25"
-        company="Infinum"
-      />
-      <EventCard
-        title="UX/UI workshop"
-        location="Hodnik FOI-ja"
-        date="05.10.2021."
-        freeSeats="25"
-        company="Five"
-      />
-      <EventCard
-        title="UX/UI workshop"
-        location="Hodnik FOI-ja"
-        date="05.10.2021."
-        freeSeats="25"
-        company="Five"
-      />
-    </Section>
+    <>
+      <Title>Events</Title>
+      <Section withoutTopPadding="true">
+        <SearchBar placeholder="Write here" onValueChange={handleSearch} />
+        {filteredEvents && (
+          <Grid columns={3}>
+            {filteredEvents.map((event) => (
+              <EventCard
+                key={event.id}
+                route={`/event/${event.id}`}
+                title={event.title}
+                location={event.location}
+                dateTime={event.dateTime}
+                availability={event.availability}
+                company={event.company}
+                buttonText="find out more"
+              />
+            ))}
+          </Grid>
+        )}
+        {!filteredEvents && <Spinner />}
+      </Section>
+    </>
   );
 };
 

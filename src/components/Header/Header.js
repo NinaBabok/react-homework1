@@ -1,38 +1,51 @@
-import React from "react";
-import "./Header.scss";
-import logo from "../../assets/logo.png";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import logo from "../../assets/images/logo.png";
+import { useLocation } from "react-router-dom";
+import {
+  HeaderWrapper,
+  Inner,
+  Logo,
+  LogoContainer,
+  Nav,
+  NavHamburger,
+  NavHamburgerLine,
+  NavItem,
+} from "./HeaderStyle";
 
 const Header = () => {
-
   let active = useLocation().pathname;
 
+  const [ visible, setVisible ] = useState(false);
+
   return (
-    <header className="Header">
-      <div className="Header-Inner">
-        <Link to="/" className="Header-LogoContainer">
-          <img alt="logo" src={logo} className="Header-Logo" />
-        </Link>
-        <div className="Header-NavHamburger">
-          <div className="Header-NavHamburgerLine"></div>
-          <div className="Header-NavHamburgerLine"></div>
-          <div className="Header-NavHamburgerLine"></div>
-        </div>
-        <nav
-          className="Header-Nav"
-        >
-          <Link to="/" className={active === "/" ? "Header-NavItem Header-NavItem_active" : "Header-NavItem"}>
+    <HeaderWrapper>
+      <Inner>
+        <LogoContainer to="/">
+          <Logo alt="logo" src={logo} />
+        </LogoContainer>
+        <NavHamburger onClick={() => setVisible(visible ? false : true)}>
+          <NavHamburgerLine />
+          <NavHamburgerLine />
+          <NavHamburgerLine />
+        </NavHamburger>
+        <Nav visible={visible.toString()}>
+          <NavItem
+            to="/"
+            active={active === "/" ? "true" : "false"}
+            onClick={() => setVisible(false)}
+          >
             Home
-          </Link>
-          <Link
+          </NavItem>
+          <NavItem
             to="/events"
-            className={active === "/events" ? "Header-NavItem Header-NavItem_active" : "Header-NavItem"}
+            active={active === "/events" ? "true" : "false"}
+            onClick={() => setVisible(false)}
           >
             Events
-          </Link>
-        </nav>
-      </div>
-    </header>
+          </NavItem>
+        </Nav>
+      </Inner>
+    </HeaderWrapper>
   );
 };
 
