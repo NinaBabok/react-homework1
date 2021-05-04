@@ -12,6 +12,7 @@ export const colors = {
   black: "#000000",
   darkGrey: "#333333",
   lightGrey: "#d0d0d0",
+  green: "#5cb85c",
   blackOverlay: "rgba(0, 0, 0, 0.7)",
 };
 export const boxShadow =

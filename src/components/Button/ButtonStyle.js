@@ -12,10 +12,15 @@ export const ButtonWrapper = styled.button`
   background: ${colors.red};
   color: ${colors.white};
   transition: ${transitionEase};
+  
+  ${(props) => props.gridSpan ? "grid-column: 1 / span 2;" : null};
 
   &:hover {
     cursor: pointer;
     border-color: ${colors.yellow};
     background: ${colors.yellow};
+  }
+  &:focus {
+    outline: none;
   }
 `;

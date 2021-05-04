@@ -7,7 +7,7 @@ export const SectionWrapper = styled.section`
 
   ${(props) => props.withoutTopPadding && "padding-top: 0;"}
 
-  @media and (${breakpoints.tablet}) {
+  @media screen and (${breakpoints.tablet}) {
     padding: 80px 25px;
 
     ${(props) => props.withoutTopPadding && "padding-top: 0;"}
@@ -15,6 +15,7 @@ export const SectionWrapper = styled.section`
 
   @media screen and (${breakpoints.desktop}) {
     padding: 80px 0;
+    max-width: 993px;
     margin: 0 auto;
 
     ${(props) => props.withoutTopPadding && "padding-top: 0;"}

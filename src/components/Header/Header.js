@@ -43,6 +43,27 @@ const Header = () => {
           >
             Events
           </NavItem>
+          <NavItem
+            to="/login"
+            active={active === "/login" ? "true" : "false"}
+            onClick={() => setVisible(false)}
+          >
+            Login
+          </NavItem>
+          <NavItem
+            to="/register"
+            active={active === "/register" ? "true" : "false"}
+            onClick={() => setVisible(false)}
+          >
+            Register
+          </NavItem>
+          <NavItem
+            to="/admin"
+            active={active === "/admin" ? "true" : "false"}
+            onClick={() => setVisible(false)}
+          >
+            Admin
+          </NavItem>
         </Nav>
       </Inner>
     </HeaderWrapper>

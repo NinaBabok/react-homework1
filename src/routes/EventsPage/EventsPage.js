@@ -32,7 +32,7 @@ const Events = () => {
       <Section withoutTopPadding="true">
         <SearchBar placeholder="Write here" onValueChange={handleSearch} />
         {filteredEvents && (
-          <Grid columns={3}>
+          <Grid>
             {filteredEvents.map((event) => (
               <EventCard
                 key={event.id}

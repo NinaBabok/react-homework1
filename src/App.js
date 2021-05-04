@@ -7,6 +7,9 @@ import Event from "./routes/EventPage/EventPage";
 
 import styled from "styled-components";
 import { Route, Switch } from "react-router";
+import { Login } from "./routes/Login/Login";
+import { Register } from "./routes/Register/Register";
+import { Admin } from "./routes/Admin/Admin";
 
 function App() {
 
@@ -19,9 +22,11 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/events" component={Events} />
           <Route path="/event/:id" component={Event} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/admin" component={Admin} />
         </Switch>
       </Main>
-
       <Footer />
     </>
   );

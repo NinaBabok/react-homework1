@@ -22,7 +22,7 @@ const Home = () => {
       <Hero />
       <Section title="Featured events">
         {events && (
-          <Grid columns={3}>
+          <Grid columns={events.filter(e => e.isFeatured === true).length}>
             {events.map(
               (event) =>
                 event.isFeatured && (

@@ -36,11 +36,7 @@ export const Inner = styled.div`
 
 export const LogoContainer = styled(Link)`
   display: block;
-  width: 50px;
-
-  @media screen and (${breakpoints.desktopLarge}) {
-    width: 60px;
-  }
+  width: 80px;
 `;
 
 export const Logo = styled.img`
