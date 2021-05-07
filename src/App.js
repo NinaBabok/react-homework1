@@ -10,13 +10,20 @@ import { Route, Switch } from "react-router";
 import { Login } from "./routes/Login/Login";
 import { Register } from "./routes/Register/Register";
 import { Admin } from "./routes/Admin/Admin";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoggedIn, setIsLOggedIn] = useState(false);
+
+  useEffect(() => {
+    localStorage.getItem('isAdmin');
+    localStorage.getItem('authToken');
+  }, [isLoggedIn]);
 
   return (
     <>
-      <Header />
-
+      <Header isAdmin={isAdmin} isLoggedIn={isLoggedIn} />
       <Main>
         <Switch>
           <Route path="/" exact component={Home} />

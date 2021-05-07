@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Form, Title, FormRow, InputLabel, InputText, InputError } from '../../lib/style/generalStyles';
+import { Form, Title, FormRow, InputLabel, InputText, InputError, SuccessMessage } from '../../lib/style/generalStyles';
 import Section from '../../components/Section/Section';
 import Button from '../../components/Button/Button';
 import { Spinner } from '../../components/Spinner/Spinner';
+import { loginUser } from '../../api/login';
+import { getAllUsers } from '../../api/user';
 
 export const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const [successMessage, setSuccessMessage] = useState('');
+    const [isRequestFinished, setIsRequestFinished] = useState(false);
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -21,13 +27,35 @@ export const Login = () => {
             password: Yup.string()
                 .required('Password is required'),
         }),
-        onSubmit: values => {
+        onSubmit: async (values, { resetForm }) => {
             setIsLoading(true);
+            setIsError(false);
+            setIsRequestFinished(false);
 
-            setTimeout(() => {
+            try {
+                const response = await loginUser({
+                    email: values.email,
+                    password: values.password
+                });
+                const users = await getAllUsers(response.token);
+                const isAdmin = users.find(u => u.email === values.email).isAdmin;
+
+                localStorage.setItem('authToken', response.token);
+                localStorage.setItem('isAdmin', isAdmin);
+
+                resetForm({});
+
+                setTimeout(() => {
+                    setSuccessMessage('You\'ve logged in, welcome!');
+                }, 4000);
+
+            } catch (error) {
+                setIsError(true);
+                setSuccessMessage('Something went wrong.');
+            } finally {
                 setIsLoading(false);
-                alert(JSON.stringify(values));
-            }, 1000);
+                setIsRequestFinished(true);
+            }
         }
     });
 
@@ -35,6 +63,9 @@ export const Login = () => {
         <>
             <Title>Login</Title>
             <Section withoutTopPadding={true}>
+                {isRequestFinished &&
+                    <SuccessMessage isError={isError}>{successMessage}</SuccessMessage>
+                }
                 {!isLoading
                     ? <Form onSubmit={formik.handleSubmit}>
                         <FormRow>
@@ -61,7 +92,7 @@ export const Login = () => {
                         </FormRow>
                         <Button type="submit">Login</Button>
                     </Form>
-                    :  <Spinner />
+                    : <Spinner />
                 }
             </Section>
         </>
