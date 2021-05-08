@@ -8,7 +8,7 @@ import { Spinner } from '../../components/Spinner/Spinner';
 import { loginUser } from '../../api/login';
 import { getAllUsers } from '../../api/user';
 
-export const Login = () => {
+export const Login = ({login}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
@@ -40,13 +40,11 @@ export const Login = () => {
                 const users = await getAllUsers(response.token);
                 const isAdmin = users.find(u => u.email === values.email).isAdmin;
 
-                localStorage.setItem('authToken', response.token);
-                localStorage.setItem('isAdmin', isAdmin);
-
                 resetForm({});
-
+                
+                setSuccessMessage('You\'ve logged in, welcome!');
                 setTimeout(() => {
-                    setSuccessMessage('You\'ve logged in, welcome!');
+                    login(response.token, isAdmin);
                 }, 4000);
 
             } catch (error) {

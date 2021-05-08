@@ -12,9 +12,8 @@ import {
   NavItem,
 } from "./HeaderStyle";
 
-const Header = () => {
+const Header = (props) => {
   let active = useLocation().pathname;
-
   const [ visible, setVisible ] = useState(false);
 
   return (
@@ -43,6 +42,9 @@ const Header = () => {
           >
             Events
           </NavItem>
+          {props.isLoggedIn
+          ? <NavItem to='/' onClick={() => props.logout()}>Logout</NavItem>
+          : 
           <NavItem
             to="/login"
             active={active === "/login" ? "true" : "false"}
@@ -50,20 +52,22 @@ const Header = () => {
           >
             Login
           </NavItem>
-          <NavItem
+          
+          }
+          {!props.isLoggedIn && <NavItem
             to="/register"
             active={active === "/register" ? "true" : "false"}
             onClick={() => setVisible(false)}
           >
             Register
-          </NavItem>
-          <NavItem
+          </NavItem>}
+          {props.isAdmin && <NavItem
             to="/admin"
             active={active === "/admin" ? "true" : "false"}
             onClick={() => setVisible(false)}
           >
             Admin
-          </NavItem>
+          </NavItem>}
         </Nav>
       </Inner>
     </HeaderWrapper>

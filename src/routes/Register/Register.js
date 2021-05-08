@@ -6,8 +6,10 @@ import Section from '../../components/Section/Section';
 import Button from '../../components/Button/Button';
 import { Spinner } from '../../components/Spinner/Spinner';
 import { registerUser } from '../../api/register';
+import { loginUser } from '../../api/login';
+import { getAllUsers } from '../../api/user';
 
-export const Register = () => {
+export const Register = ({ login }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
@@ -56,16 +58,23 @@ export const Register = () => {
             }
 
             registerUser(user).then(result => {
-                console.log(result);
                 resetForm({});
                 setIsError(false);
                 setSuccessMessage('You\'ve registered, welcome!');
                 setTimeout(() => {
                     setIsRequestFinished(false);
-                    }, 4000
-                )
-            }).catch(error => {
-                console.log(error);
+                }, 4000)
+            })
+            .then(async () => {
+                const response = await loginUser({
+                    email: user.email,
+                    password: user.password
+                });
+                const users = await getAllUsers(response.token);
+                const isAdmin = users.find(u => u.email === values.email).isAdmin;
+                login(response.token, isAdmin);
+            })           
+            .catch(error => {
                 setIsError(true);
                 setSuccessMessage('Something went wrong.');
             }).finally(() => {
