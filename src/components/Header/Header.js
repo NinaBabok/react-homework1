@@ -43,7 +43,7 @@ const Header = (props) => {
             Events
           </NavItem>
           {props.isLoggedIn
-          ? <NavItem to='/' onClick={() => props.logout()}>Logout</NavItem>
+          ? <NavItem to='/login' onClick={() => props.logout()}>Logout</NavItem>
           : 
           <NavItem
             to="/login"
