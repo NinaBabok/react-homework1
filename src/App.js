@@ -6,7 +6,7 @@ import Events from "./routes/EventsPage/EventsPage";
 import Event from "./routes/EventPage/EventPage";
 
 import styled from "styled-components";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import { Login } from "./routes/Login/Login";
 import { Register } from "./routes/Register/Register";
 import { Admin } from "./routes/Admin/Admin";
@@ -16,6 +16,12 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 function App() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem('authToken') ? true : false);
