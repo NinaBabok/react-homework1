@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Form, Title, FormRow, InputLabel, InputText, InputError, InputCheckbox, CheckboxWrapper, SuccessMessage } from '../../lib/style/generalStyles';
@@ -8,12 +8,14 @@ import { Spinner } from '../../components/Spinner/Spinner';
 import { registerUser } from '../../api/register';
 import { loginUser } from '../../api/login';
 import { getAllUsers } from '../../api/user';
+import { AuthContext } from '../../context/AuthContext';
 
-export const Register = ({ login }) => {
+export const Register = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [isRequestFinished, setIsRequestFinished] = useState(false);
+    const { login } = useContext(AuthContext);
 
     const formik = useFormik({
         initialValues: {

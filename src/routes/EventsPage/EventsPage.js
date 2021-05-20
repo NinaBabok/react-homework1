@@ -8,8 +8,6 @@ import { Spinner } from "../../components/Spinner/Spinner";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
 
 const Events = () => {
-
-  console.log('events')
   const [events, setEvents] = useState(null);
   const [filteredEvents, setFilteredEvents] = useState(null);
 

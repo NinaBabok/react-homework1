@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Form, Title, FormRow, InputLabel, InputText, InputError, SuccessMessage } from '../../lib/style/generalStyles';
@@ -7,12 +7,15 @@ import Button from '../../components/Button/Button';
 import { Spinner } from '../../components/Spinner/Spinner';
 import { loginUser } from '../../api/login';
 import { getAllUsers } from '../../api/user';
+import { AuthContext } from '../../context/AuthContext';
 
-export const Login = ({login}) => {
+export const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [isRequestFinished, setIsRequestFinished] = useState(false);
+
+    const { login } = useContext(AuthContext);
 
     const formik = useFormik({
         initialValues: {

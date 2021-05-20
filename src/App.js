@@ -10,13 +10,12 @@ import { Route, Switch, useLocation } from "react-router-dom";
 import { Login } from "./routes/Login/Login";
 import { Register } from "./routes/Register/Register";
 import { Admin } from "./routes/Admin/Admin";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const { setIsLoggedIn, setIsAdmin } = useContext(AuthContext);
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -26,33 +25,19 @@ function App() {
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem('authToken') ? true : false);
     setIsAdmin(JSON.parse(localStorage.getItem('isAdmin')));
-  }, []);
-
-  function login(authToken, isAdmin) {
-    localStorage.setItem('authToken', authToken);
-    localStorage.setItem('isAdmin', isAdmin);
-    setIsLoggedIn(true);
-    setIsAdmin(isAdmin);
-  }
-
-  function logout() {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('isAdmin');
-    setIsLoggedIn(false);
-    setIsAdmin(false);
-  }
+  }, [setIsLoggedIn, setIsAdmin]);
 
   return (
     <>
-      <Header isAdmin={isAdmin} isLoggedIn={isLoggedIn} logout={logout} />
+      <Header />
       <Main>
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/events" component={Events} />
-          <Route path="/event/:id" component={Event} />
-          <ProtectedRoute role='isLoggedIn' isLoggedIn={!isLoggedIn} path="/login" login={login} component={Login} />
-          <ProtectedRoute role='isLoggedIn' isLoggedIn={!isLoggedIn} path="/register" login={login} component={Register}/>
-          <ProtectedRoute role='isAdmin' isAdmin={isAdmin} path='/admin' component={Admin} />
+          <Route path='/' exact component={Home} />
+          <Route path='/events' component={Events} />
+          <Route path='/event/:id' component={Event} />
+          <ProtectedRoute role='isAnonymous' path='/login' component={Login} />
+          <ProtectedRoute role='isAnonymous' path='/register' component={Register}/>
+          <ProtectedRoute role='isAdmin' path='/admin' component={Admin} />
         </Switch>
       </Main>
       <Footer />
